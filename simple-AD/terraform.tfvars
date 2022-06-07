@@ -1,6 +1,6 @@
 resource_prefix = "adsec"
 
-node_location_dc   = "eastus2"
+node_location_dc   = "eastus"
 vmsize_dc = "Standard_D2s_v3"
 active_directory_domain = "erikstestlab.com"
 active_directory_netbios_name = "ERIKSTESTLAB"
