@@ -108,3 +108,8 @@ variable "domadminpassword" {
 variable "domadminuser" {
   type = string
 }
+
+#Time zone for VMs
+variable "timezone" {
+  type = string
+}

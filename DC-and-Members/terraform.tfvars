@@ -1,6 +1,7 @@
 resource_prefix = "adsec"
 
 node_location_dc   = "eastus"
+timezone = "Eastern Standard Time"
 vmsize_dc = "Standard_D2s_v3"
 active_directory_domain = "erikstestlab.com"
 active_directory_netbios_name = "ERIKSTESTLAB"
