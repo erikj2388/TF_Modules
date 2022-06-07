@@ -242,9 +242,9 @@ resource "azurerm_windows_virtual_machine" "member_vm" {
   }
 
   source_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2019-Datacenter"
+    publisher = "MicrosoftWindowsDesktop"
+    offer     = "Windows-10"
+    sku       = "win10-21h2-pro-g2"
     version   = "latest"
   }
 

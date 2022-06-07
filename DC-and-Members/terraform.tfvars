@@ -1,5 +1,6 @@
 resource_prefix = "adsec"
 
+#Variables for DC VM
 node_location_dc   = "eastus"
 timezone = "Eastern Standard Time"
 vmsize_dc = "Standard_D2s_v3"
@@ -9,6 +10,7 @@ domadminuser = "adminuser"
 domadminpassword = "P@ssw0rd123!!!"
 safemode_password = "P@ssw0rd123!!!"
 
+#Variables for Member VMs
 node_location_member = "eastus"
 vmsize_member = "Standard_D2s_v3"
 node_count = 2
