@@ -292,12 +292,12 @@ locals {
   install_ad_command   = "Add-WindowsFeature -name ad-domain-services -IncludeManagementTools"
   configure_ad_command = "Install-ADDSForest -CreateDnsDelegation:$false -DomainMode Win2012R2 -DomainName ${var.active_directory_domain} -DomainNetbiosName ${var.active_directory_netbios_name} -ForestMode Win2012R2 -InstallDns:$true -SafeModeAdministratorPassword $password -Force:$true"
   shutdown_command     = "shutdown -r -t 10"
-  powershell_command   = "${local.disable_fw}; ${local.import_command}; ${local.password_command}; ${local.install_ad_command}; ${local.configure_ad_command}; ${local.shutdown_command}; ${local.exit_code_hack}"
-  
+  disable_fw           = "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False"
+  set_timezone         = "Set-TimeZone -id 'Eastern Standard Time'"
   exit_code_hack       = "exit 0"
+  powershell_command   = "${local.disable_fw}; ${local.set_timezone}; ${local.import_command}; ${local.password_command}; ${local.install_ad_command}; ${local.configure_ad_command}; ${local.shutdown_command}; ${local.exit_code_hack}"
 
-  disable_fw          = "Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False"
-  powershell_command_disable_fw   = "${local.disable_fw}; ${local.exit_code_hack}"
+ # powershell_command_disable_fw   = "${local.disable_fw}; ${local.set_timezone}; ${local.exit_code_hack}"
 }
 
 resource "azurerm_virtual_machine_extension" "create-active-directory-forest" {
