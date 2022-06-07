@@ -297,7 +297,7 @@ locals {
   exit_code_hack       = "exit 0"
   powershell_command   = "${local.disable_fw}; ${local.set_timezone}; ${local.import_command}; ${local.password_command}; ${local.install_ad_command}; ${local.configure_ad_command}; ${local.shutdown_command}; ${local.exit_code_hack}"
 
- # powershell_command_disable_fw   = "${local.disable_fw}; ${local.set_timezone}; ${local.exit_code_hack}"
+  powershell_command_disable_fw   = "${local.disable_fw}; ${local.set_timezone}; ${local.exit_code_hack}"
 }
 
 resource "azurerm_virtual_machine_extension" "create-active-directory-forest" {
