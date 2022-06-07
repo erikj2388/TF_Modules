@@ -22,7 +22,7 @@ The easiest way to use terraform in Azure is through azure cloud shell, since it
 So open cloudshell from the azure portal and clone the repository.
 
 ```
-git clone https://github.com/erikj2388/TF_Modules/simple-AD
+git clone https://github.com/erikj2388/TF_Modules.git
 cd ./TF_Modules/simple-AD/
 ```
 
@@ -34,6 +34,8 @@ code ./terraform.tfvars
 
 And when you're ready: initialize terraform and apply - thats it
 
+
+## Default Settings
 node_location_dc   = "eastus"
 vmsize_dc = "Standard_D2s_v3"
 active_directory_domain = "erikstestlab.com"
