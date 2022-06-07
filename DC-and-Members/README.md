@@ -1,4 +1,4 @@
-Simple AD
+# DC and Members
 
 This Module will spin up infrastructure for a single Domain Controller in a VNet with 2 member VMs in a separate VNet.
 VNets are Peered and RDP access is enabled to all three.
