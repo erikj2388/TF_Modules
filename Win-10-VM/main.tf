@@ -19,7 +19,11 @@ terraform {
 }
 
 provider "azurerm" {
-  features {}
+  features {
+    resource_group {
+       prevent_deletion_if_contains_resources = false
+     }
+  }
 }
 
 ##########################################################
@@ -140,6 +144,7 @@ locals {
   exit_code_hack       = "exit 0"
   powershell_command_disable_fw   = "${local.disable_fw}; ${local.set_timezone}; ${local.exit_code_hack}"
 }
+
 resource "azurerm_virtual_machine_extension" "disable_fw_member" {
   virtual_machine_id   = azurerm_windows_virtual_machine.windows_vm_win10vm.id
   name                 = "disable_fw"
@@ -153,3 +158,39 @@ resource "azurerm_virtual_machine_extension" "disable_fw_member" {
     }
 SETTINGS
 }
+
+/*
+##########################################################
+# Create Bastion Host components
+##########################################################
+
+# subnet within the virtual network
+resource "azurerm_subnet" "bastion_subnet" {
+  name                 = "AzureBastionSubnet"
+  resource_group_name  = azurerm_resource_group.win10vm_rg.name
+  virtual_network_name = azurerm_virtual_network.win10vm_vnet.name
+  address_prefixes       = ["10.100.1.0/24"]
+
+}
+
+resource "azurerm_public_ip" "Bastion_Public_ip" {
+  name = "Bastion_WAN_IP"
+  location = azurerm_resource_group.win10vm_rg.location
+  resource_group_name  = azurerm_resource_group.win10vm_rg.name
+  allocation_method = "Static"
+  sku = "Standard"
+  tags = var.tags
+}
+
+resource "azurerm_bastion_host" "Bastion_win10VM" {
+  name = "Win10-bastion"
+  location = var.node_location_win10vm
+  resource_group_name = azurerm_resource_group.win10vm_rg.name
+
+  ip_configuration {
+    name = "configuration"
+    subnet_id = azurerm_subnet.bastion_subnet.id
+    public_ip_address_id = azurerm_public_ip.Bastion_Public_ip.id
+  }
+}
+*/
