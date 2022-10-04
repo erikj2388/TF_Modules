@@ -70,6 +70,7 @@ resource "azurerm_network_interface_security_group_association" "example" {
   network_security_group_id = azurerm_network_security_group.my_terraform_nsg.id
 }
 
+/*
 # Generate random text for a unique storage account name
 resource "random_id" "random_id" {
   keepers = {
@@ -80,7 +81,7 @@ resource "random_id" "random_id" {
   byte_length = 8
 }
 
-/*
+
 # Create storage account for boot diagnostics
 resource "azurerm_storage_account" "my_storage_account" {
   name                     = "diag${random_id.random_id.hex}"
@@ -144,4 +145,9 @@ resource "azurerm_linux_virtual_machine" "my_terraform_vm" {
     storage_account_uri = azurerm_storage_account.my_storage_account.primary_blob_endpoint
   }
   */
+}
+
+# Data template Bash bootstrapping file
+data "template_file" "linux-vm-cloud-init" {
+  template = file("azure-user-data.sh")
 }
