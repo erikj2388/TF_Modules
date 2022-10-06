@@ -2,4 +2,4 @@
 sudo apt-get update -y
 sudo apt install docker.io -y
 sudo snap install docker -y
-docker pull rustscan/rustscan:1.10.0
+sudo docker pull cmnatic/rustscan:2.102222.1111
